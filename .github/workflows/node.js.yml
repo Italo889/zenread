@@ -24,8 +24,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Mudar para o diretório do projeto
-      run: cd my-manga-api
-    - run: npm ci
-    - run: npm run build --if-present
+    - name: Instalar dependências
+      run: npm ci
+      working-directory: ./my-manga-api
+    - name: Executar build
+      run: npm run build --if-present
+      working-directory: ./my-manga-api
+    - name: Executar testes
     - run: npm test
+      working-directory: ./my-manga-api
